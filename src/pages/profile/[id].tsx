@@ -3,7 +3,7 @@ import UserProfile from "~/components/profile/UserProfile";
 import UserProfileNotFound from "~/components/profile/UserProfileNotFound";
 import Spinner from "~/components/Spinner";
 import { api } from "~/utils/api";
-import { userIdInputSchema } from "~/validations/userInputs";
+import { userIdInputSchema } from "~/validations/userInputs/useIdInput.schema";
 
 interface ProfileProps {
   id: string;

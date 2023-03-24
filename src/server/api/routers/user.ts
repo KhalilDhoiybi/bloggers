@@ -1,4 +1,4 @@
-import { userIdInputSchema } from "~/validations/userInputs";
+import { userIdInputSchema } from "~/validations/userInputs/useIdInput.schema";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 
 export const userRouter = createTRPCRouter({

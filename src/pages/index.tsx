@@ -1,6 +1,7 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import BlogPost from "~/components/BlogPost";
+import CreateBlog from "~/components/CreateBlog";
 import EmptyHome from "~/components/home/EmptyHome";
 import Spinner from "~/components/Spinner";
 import Container from "~/layouts/Container";
@@ -20,9 +21,11 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Home Page</title>
+        <title>Home</title>
       </Head>
-      <Container className="space-y-8 py-6">
+      <Container className="space-y-4 py-6">
+        <CreateBlog />
+        <hr className="border-slate-300" />
         {!getBlogsQuery.data.blogs.length && <EmptyHome />}
         {!!getBlogsQuery.data.blogs &&
           getBlogsQuery.data.blogs.map((blog) => (

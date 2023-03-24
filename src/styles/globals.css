@@ -5,3 +5,5 @@
 body {
   @apply bg-slate-800 text-white;
 }
+/* background-image: url("/bg-img.jpg");
+  @apply bg-cover bg-fixed text-amber-500; */
