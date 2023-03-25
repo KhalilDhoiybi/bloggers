@@ -25,7 +25,6 @@ const Home: NextPage = () => {
       </Head>
       <Container className="space-y-4 py-6">
         <CreateBlog />
-        <hr className="border-slate-300" />
         {!getBlogsQuery.data.blogs.length && <EmptyHome />}
         {!!getBlogsQuery.data.blogs &&
           getBlogsQuery.data.blogs.map((blog) => (
