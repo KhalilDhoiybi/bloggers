@@ -91,7 +91,6 @@ const CreateBlog = () => {
           </div>
         </form>
       </div>
-      <hr className="border-slate-300" />
     </>
   );
 };
