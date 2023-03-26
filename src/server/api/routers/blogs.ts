@@ -1,4 +1,6 @@
+import { TRPCError } from "@trpc/server";
 import { createBlogInputSchema } from "~/validations/blogInputs/createBlogInput.schema";
+import { deleteBlogInputSchema } from "~/validations/blogInputs/deleteBlogInput.schema";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const blogsRouter = createTRPCRouter({
@@ -29,5 +31,26 @@ export const blogsRouter = createTRPCRouter({
       return {
         blog,
       };
+    }),
+  deleteBlog: protectedProcedure
+    .input(deleteBlogInputSchema)
+    .mutation(async ({ ctx, input }) => {
+      const { id } = input;
+      const blog = await ctx.prisma.blog.findFirst({
+        where: {
+          id,
+        },
+      });
+      if (!blog) {
+        throw new TRPCError({ code: "NOT_FOUND" });
+      }
+      if (blog.userId !== ctx.session.user.id) {
+        throw new TRPCError({ code: "FORBIDDEN" });
+      }
+      return await ctx.prisma.blog.delete({
+        where: {
+          id,
+        },
+      });
     }),
 });
