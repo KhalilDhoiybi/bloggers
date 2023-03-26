@@ -4,6 +4,8 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { type FC } from "react";
+import { userConfirmDeleteStore } from "~/stores/confirmDeleteStore";
+import DeleteConfirmation from "./DeleteConfirmation";
 
 interface BlogProps {
   blog: Blog;
@@ -12,6 +14,7 @@ interface BlogProps {
 
 const BlogPost: FC<BlogProps> = ({ blog, user }) => {
   const { data: session } = useSession();
+  const onOpenConfirmDelete = userConfirmDeleteStore((state) => state.onOpen);
 
   return (
     <div className="rounded-lg border border-slate-500">
@@ -33,7 +36,7 @@ const BlogPost: FC<BlogProps> = ({ blog, user }) => {
             Posted At: {blog.createdAt.toLocaleString()}
           </p>
           {session?.user.id === user.id && (
-            <button>
+            <button onClick={onOpenConfirmDelete}>
               <TrashIcon className="h-5 w-5 text-slate-400 hover:text-slate-200" />
             </button>
           )}
@@ -43,6 +46,7 @@ const BlogPost: FC<BlogProps> = ({ blog, user }) => {
         <h1 className="text-center text-2xl font-bold">{blog.title}</h1>
         <p className="text-lg">{blog.text}</p>
       </div>
+      {session && <DeleteConfirmation id={blog.id} />}
     </div>
   );
 };

@@ -20,9 +20,9 @@ const CreateBlog = () => {
   });
   const ctx = api.useContext();
   const createBlogMutation = api.blogsRouter.createBlog.useMutation({
-    onSuccess: () => {
+    onSuccess: async () => {
       reset();
-      void ctx.blogsRouter.getBlogs.invalidate();
+      await ctx.blogsRouter.getBlogs.invalidate();
     },
     onError: () => {
       SetErrorMsg(true);
@@ -84,7 +84,7 @@ const CreateBlog = () => {
             <div className="py-1"></div>
             <button
               type="submit"
-              className=" w-fit rounded-md border border-white px-4 py-1 hover:bg-white hover:text-[#1E293B]"
+              className="w-fit rounded-md border border-white px-4 py-1 hover:bg-white hover:text-[#1E293B]"
             >
               Post
             </button>
