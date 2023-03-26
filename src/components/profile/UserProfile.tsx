@@ -44,8 +44,7 @@ const UserProfile: FC<UserProfileProps> = ({ user }) => {
             </div>
           </div>
         </div>
-        <hr className="my-4 border-slate-400" />
-        <div className="space-y-4 pb-4">
+        <div className="space-y-4 py-4">
           {user?.blogs.map((blog) => (
             <BlogPost key={blog.id} blog={blog} user={user} />
           ))}
